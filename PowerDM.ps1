@@ -45,6 +45,13 @@ $Global:CreateChar = [Windows.Markup.XamlReader]::Load($CreateCharXamlReader)
 Write-Verbose $CreateChar
 }
 
+function Get-LoginScreen{
+	[xml]$LoginXaml = Get-Content -Path "$PSScriptRoot\Views\Login.xaml"
+	$LoginXamlReader = New-Object System.Xml.XmlNodeReader $LoginXaml
+	$Global:LoginScreen = [Windows.Markup.XamlReader]::Load($LoginXamlReader)
+	Write-Verbose $LoginScreen
+	}
+
 #endregion
 
 Get-Homexaml
