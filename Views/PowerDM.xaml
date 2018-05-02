@@ -1,0 +1,30 @@
+<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="PowerDM" Height="350" Width="525">
+    <Border Padding="10">
+        <StackPanel>
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Column="0" Grid.Row="0">
+                    <Button x:Name="btnNewChar" Margin="5 5">
+                        <Image Source="C:\Users\vincentn\Desktop\Scripts\PowerDM\images\newchar.png"/>
+                    </Button>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="0">
+                    <Button x:Name="btnLoadChar" Margin="5 5">
+                        <Image Source="C:\Users\vincentn\Desktop\Scripts\PowerDM\images\loadchar.png" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Border>
+</Window>
