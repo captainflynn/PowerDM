@@ -12,7 +12,7 @@
 #>
 
 Import-Module .\Functions.psm1
-
+Write-HOst "Test"
 #region XAML initialization
 <#
 .DESCRIPTION
