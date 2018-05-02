@@ -1,6 +1,35 @@
+<#
+	.NOTES
+	===========================================================================
+	 Created with: 	Visual Studio Code
+	 Created on:   	1-5-2018 15:41
+	 Created by:    Vincent Nuszbaum
+	 Organization: 	Artemis Corp
+	 Filename:     	PowerDM.PS1
+	===========================================================================
+	.DESCRIPTION
+		The main code behind
+#>
+
 Import-Module .\Functions.psm1
 
+#region XAML initialization
+<#
+.DESCRIPTION
+		Required for generating image location in XAML
+#>
+$FindString = '$Location$'
+$inputFile = "$PSScriptRoot\Views\Source\PowerDMSource.xaml"
+$outfile = "$PSScriptRoot\Views\PowerDM.xaml"
+(Get-Content $inputFile) | ForEach-Object {$_.replace($findString,$PSScriptRoot)} | Out-File -FilePath $outfile
+
+#endregion
+
 #region XAML assemblies
+<#
+.DESCRIPTION
+		Xaml Assemblies
+#>
 function Get-Homexaml{
 Add-Type -AssemblyName PresentationFramework
 [xml]$HomeXaml = Get-Content -Path "$PSScriptRoot\Views\PowerDM.xaml"

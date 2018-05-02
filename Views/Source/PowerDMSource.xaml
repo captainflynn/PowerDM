@@ -16,12 +16,12 @@
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Column="0" Grid.Row="0">
                     <Button x:Name="btnNewChar" Margin="5 5">
-                        <Image Source="C:\Users\vincentn\Desktop\Scripts\PowerDM\images\newchar.png"/>
+                        <Image Source="$Location$\images\newchar.png"/>
                     </Button>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Grid.Row="0">
                     <Button x:Name="btnLoadChar" Margin="5 5">
-                        <Image Source="C:\Users\vincentn\Desktop\Scripts\PowerDM\images\loadchar.png" />
+                        <Image Source="$Location$\images\loadchar.png" />
                     </Button>
                 </StackPanel>
             </Grid>
