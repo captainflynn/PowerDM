@@ -1,0 +1,28 @@
+<Window x:Class="PowerDM.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PowerDM"
+        mc:Ignorable="d"
+        Title="Login" Height="150" Width="200">
+    <Border Padding="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="PowerDM" HorizontalAlignment="Center"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="UserName" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBox Grid.Row="1" Grid.Column="1" Padding="3" Margin="5 2 0 0" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Password" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <TextBox Grid.Row="2" Grid.Column="1" Padding="3" Margin="5 2 0 0" />
+        </Grid>
+    </Border>
+</Window>
