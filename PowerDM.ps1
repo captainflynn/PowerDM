@@ -26,10 +26,6 @@ $outfile = "$PSScriptRoot\Views\PowerDM.xaml"
 #endregion
 
 #region XAML assemblies
-<#
-.DESCRIPTION
-		Xaml Assemblies
-#>
 function Get-Homexaml{
 [xml]$HomeXaml = Get-Content -Path "$PSScriptRoot\Views\PowerDM.xaml"
 $Homexamlreader = New-Object System.Xml.XmlNodeReader $HomeXaml
@@ -51,13 +47,26 @@ $Global:LoginScreen = [Windows.Markup.XamlReader]::Load($LoginXamlReader)
 Write-Verbose $LoginScreen
 }
 
+function Get-LoadChar{
+[xml]$LoadCharXaml = Get-Content -Path "$PSScriptRoot\Views\LoadChar.xaml"
+$LoadCharXamlReader = New-Object System.Xml.XmlNodeReader $LoadCharXaml
+$Global:LoadChar = [Windows.Markup.XamlReader]::Load($LoadCharXamlReader)
+Write-Verbose $LoadChar
+}
+
+function Get-CharacterSheet{
+	[xml]$CharacterSheetXaml = Get-Content -Path "$PSScriptRoot\Views\CharacterSheet.xaml"
+	$CharacterSheetXamlReader = New-Object System.Xml.XmlNodeReader $CharacterSheetXaml
+	$Global:CharacterSheet = [Windows.Markup.XamlReader]::Load($CharacterSheetXamlReader)
+	Write-Verbose $CharacterSheet
+	}
+
 #endregion
 
-Get-LoginScreen
-Get-Homexaml
+#region XAML Control Variables
 function Add-HomeControlVariables {
 	New-Variable -Name 'btnNewChar' -Value $Homewindow.FindName('btnNewChar') -Scope 1 -Force
-	New-Variable -Name 'btnnLoadChar' -Value $Homewindow.FindName('btnLoadChar') -Scope 1 -Force
+	New-Variable -Name 'btnLoadChar' -Value $Homewindow.FindName('btnLoadChar') -Scope 1 -Force
 }
 
 function Add-LoginControlVariables {
@@ -66,14 +75,37 @@ function Add-LoginControlVariables {
 	New-Variable -Name 'btnLogin' -Value $LoginScreen.FindName('btnLogin') -Scope 1 -Force
 }
 
+function Add-LoadCharControlVariables {
+	New-Variable -Name 'gridCharView' -Value $LoadChar.FindName('gridCharView') -Scope 1 -Force
+	New-Variable -Name 'btnLoadCharPro' -Value $LoadChar.FindName('btnLoadCharPro') -Scope 1 -Force
+	New-Variable -Name 'btnCloseLoad' -Value $LoadChar.FindName('btnCloseLoad') -Scope 1 -Force
+}
+
+function Add-CharacterSheetControlVariables {
+	New-Variable -Name 'txtName' -Value $LoadChar.FindName('txtName') -Scope 1 -Force
+}
+#endregion
+
+$characters = Import-Csv -LiteralPath "$PSScriptRoot\Resources\characters.csv" -Delimiter ";"
+
+Get-LoginScreen
+Get-Homexaml
+Get-CharWizard
+Get-LoadChar
+Get-CharacterSheet
 Add-HomeControlVariables
 Add-LoginControlVariables
+Add-LoadCharControlVariables
+Add-CharacterSheetControlVariables
 
 $btnLogin.add_Click({
 	$usertest = $txtUsername.Text
 	$passtest = $txtPassword.Password
-	Write-Host $usertest
-	Write-Host $passtest
+	if ($usertest -eq "vincent" -and $passtest -eq "test")
+	{
+		$LoginScreen.Visibility = "Hidden"
+		$Homewindow.ShowDialog()
+	}
 })
 
 $btnNewChar.add_Click({
@@ -81,5 +113,15 @@ $btnNewChar.add_Click({
 	$CreateChar.ShowDialog()
 })
 
+$btnLoadChar.add_Click({
+	Get-LoadChar
+	Add-LoadCharControlVariables
+	$gridCharView.ItemsSource = @($characters)
+	$LoadChar.ShowDialog()
+})
+
+$btnLoadCharPro.add_Click({
+	return $gridCharView.SelectedItems
+})
+
 $LoginScreen.ShowDialog()
-#$Homewindow.ShowDialog()
